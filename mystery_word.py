@@ -9,11 +9,15 @@ import random
 #create variable to open file & convert to list
 #use random method to randomize word selection
 def word_list():
-    words = open("test-word.txt").readlines()
+    words = open("words.txt").readlines()
 #readlines() method returns list containing each line in the file as a list item
     word = random.choice(words).lower()
     return word
 #import random/random.choice tells program to pick random word from a list
+
+def secret_word():
+    words = open("secretword.txt").readlines()
+    return words
 
 #create function to for player guess
 #set 2 parameters, one for the word and another to create blank space for the guess
@@ -47,15 +51,16 @@ def game_function(word):
     guess_limit = 8
     print("\n💯 Welcome to Orlando's " + '"Guess-it Game!"' + " Let's get it poppin! 💯")
     print("\nThis word contains " + str(len(word)) + " letters")
+    # print game introduction before while loop, so it does not keep looping during
     
     
     while True:
         if guess_limit != 0:
         # use is not equal function (!=) to notify if guess_limit not at 0, still about to guess/loop continues
             print("\nYou got " + str(guess_limit) + " more guesses left in the bag")
-            print("\nWord is : " + guess_word(word, character_guess))
+            print("\nWord is: " + guess_word(word, character_guess))
             # used print and call guess_word function to show current state of word and character guess
-            print("Letters guessed : " + "".join(character_guess))
+            print("Letters guessed: " + "" + str(character_guess))
                 
             if guess_word(word, character_guess) == word:
                 print("\nNailed it! " + 'The word "' + word + '" is the correct answer! 🔥🔥🔥')
@@ -65,6 +70,7 @@ def game_function(word):
             if guess in character_guess:
                 guess_limit == 0
                 print("\nYou've already used that letter! Rewind that back, bruh!")
+                
             # create if statement if guess is already included in character guess list
             # if guessed input is already in list, used equality operator for keep guess limit true in current state
             
@@ -90,8 +96,11 @@ def game_function(word):
 while True:
     word = word_list()
     game_function(word)
-    if input("Run it back? y/n: ").lower().startswith("n"):
-        break
+    if input("Run it back? y/n/!: ").lower().startswith("n"):
+        if input().lower().startswith("!"):
+            secret = secret_word()
+            game_function(secret)
+    break
     
 # def play_game():
 #     pass

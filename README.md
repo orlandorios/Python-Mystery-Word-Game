@@ -68,6 +68,8 @@ The game should end when the user constructs the full word or runs out of guesse
 
 If the player runs out of guesses, reveal the word to the user when the game ends.
 
+Make a hint
+
 ### More features
 
 Once the minimum requirements are in place, implement these features. You may not get to these, and that is ok!
